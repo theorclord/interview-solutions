@@ -3,37 +3,33 @@ import ElectronicDeviceDTO from '../Models/ElectronicDeviceDTO';
 
 const endpoint = "http://localhost:15842/api/ElectronicDevice"
 
-// export const getDevices = () => axios.get(endpoint);
-
 const DeviceAPIService = () => {
     const getDevices = async (): Promise<ElectronicDeviceDTO[]> => {
       const response = await axios.get(endpoint);
       if (!response.data) {
         Promise.reject();
       }
-  
       return response.data;
     };
 
+    const postDevice = async (dto: ElectronicDeviceDTO): Promise<void> => {
+      const response = await axios.post(endpoint,dto);
+      // TODO consider if the object should be returned
+      return;
+    };
+
+    const putDevice = async (dto: ElectronicDeviceDTO): Promise<void> => {
+      const response = await axios.put(endpoint,dto);
+      // TODO consider if the object should be returned
+      return;
+    };
+
+
     return {
       getDevices,
+      postDevice,
+      putDevice,
     };
   };
-  
-  //   const authenticateWithOneTimePassword = async (
-  //     dto: OneTimePasswordLoginDTO,
-  //   ): Promise<User> => {
-  //     const response = await simpleSpApi().post<User>(routes.otp(), dto);
-  //     if (!response.data) {
-  //       return Promise.reject();
-  //     }
-  //     return response.data;
-  //   };
-  
-  //   return {
-  //     authenticate,
-  //     authenticateWithOneTimePassword,
-  //   };
-  // };
 
   export default DeviceAPIService;

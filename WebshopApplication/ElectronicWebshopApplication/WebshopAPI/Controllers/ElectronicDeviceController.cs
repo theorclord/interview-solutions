@@ -37,12 +37,12 @@ namespace WebshopAPI.Controllers
             _repository.Create(newDevice);
         }
 
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] ElectronicDevice device)
+        [HttpPut]
+        public void Put([FromBody] ElectronicDevice device)
         {
             // Handle no device in repository
-            var existingDevice = _repository.Get(id);
-            device.Id = existingDevice.Id;
+            //var existingDevice = _repository.Get(id);
+            //device.Id = existingDevice.Id;
             _repository.Update(device);
         }
     }

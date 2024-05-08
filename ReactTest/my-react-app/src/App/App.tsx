@@ -5,50 +5,30 @@ import { Button } from 'primereact/button';
 import axios from 'axios';
 import DeviceAPIService from '../Services/Services';
 import ElectronicDeviceDTO from '../Models/ElectronicDeviceDTO';
+import { InputText } from 'primereact/inputtext';
+import ElectroniceDeviceForm from './ElectronicDeviceForm';
+import { PrimeReactProvider } from 'primereact/api';
+import Edit from '../Pages/Edit';
+import Home from '../Pages/Home';
+import {
+    BrowserRouter as Router,
+    Routes,
+    Route,
+} from "react-router-dom";
 
 const App = () => {
 
-    const endpoint = "http://localhost:15842/api/ElectronicDevice"
-    const [devices, setDevices] = useState([]);
-
-    // const devicesResponse = await DeviceAPIService().getDevices();
-    // if(devicesResponse){
-    //     // console.log(devicesResponse);
-    // }
-
-    // useEffect(() => {
-    //     setTimeout(async () => {
-    //         const devicesResponse = await DeviceAPIService().getDevices()
-    //         console.log(devicesResponse);
-    //         // setDevices(devicesResponse);
-          
-    //     }, 1000);
-    //   }, []);
-
-    const fetchData = () => {
-        return axios.get(endpoint)
-              .then((response) => setDevices(response.data));
-      }
-
-    
-      useEffect(() => {
-        fetchData();
-      },[])
-
-        // Todo add a row with the adjusted price after BE update
-return (
-    <>
-    <h1>Electronic World</h1>
-    <DataTable value={devices} showGridlines tableStyle={{ minWidth: '50rem' }}>
-        <Column field="name" header="Name"></Column>
-        <Column field="description" header="Description"></Column>
-        <Column field="price" header="Price"></Column>
-        <Column field="stockQuantity" header="Stock Quantity"></Column>        
-        <Column body={<Button label='Edit'/>}></Column>
-    </DataTable>
-    <Button label='Add'/>
-    </>
-);
+    return (
+    <PrimeReactProvider>
+        <Router>
+            {/* <Navbar /> */}
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/edit" element={<Edit />} />
+            </Routes>
+        </Router>
+    </PrimeReactProvider>
+    );
 
 }
 

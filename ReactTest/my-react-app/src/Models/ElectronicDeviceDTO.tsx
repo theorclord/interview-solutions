@@ -1,7 +1,7 @@
 export default interface ElectronicDeviceDTO {
-    Id : Number;
-    Name : string;
-    Description : string;
-    Price : Number;
-    StockQuantity : Number;
+    id : number;
+    name : string;
+    description : string;
+    price : Number;
+    stockQuantity : Number;
 }
