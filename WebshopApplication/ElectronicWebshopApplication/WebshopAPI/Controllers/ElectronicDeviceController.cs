@@ -41,16 +41,26 @@ namespace WebshopAPI.Controllers
         [HttpPut]
         public void Put([FromBody] ElectronicDevice device)
         {
-            // Handle no device in repository
-            //var existingDevice = _repository.Get(id);
-            //device.Id = existingDevice.Id;
+            // TODO Handle no device in repository
             _repository.Update(device);
         }
 
         private ElectronicDeviceDTO CreateDTO(ElectronicDevice device)
         {
-            // TODO handle algorithm
-            return new ElectronicDeviceDTO(device.Id, device.Name, device.Description, device.Price, device.StockQuantity);
+            // Linear algorithm going from 100% to max value going from the threshold to 1
+            var modifiedPrice = device.Price;
+
+            var threshold = 10;
+            var maxValueIncreasePercentage = 50;
+            var maxValueIncrease = (maxValueIncreasePercentage * device.Price) / 100;
+            
+            if (device.StockQuantity <= threshold && device.StockQuantity > 0)
+            {
+                var addedPrice = -maxValueIncrease / threshold * (device.StockQuantity - 1) + maxValueIncrease;
+                modifiedPrice += addedPrice;
+            }
+
+            return new ElectronicDeviceDTO(device.Id, device.Name, device.Description, device.Price, device.StockQuantity) { ModifiedPrice = modifiedPrice};
         }
     }
 }

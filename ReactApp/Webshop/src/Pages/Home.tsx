@@ -50,7 +50,8 @@ const Home = () => {
             <Column field="name" header="Name"></Column>
             <Column field="description" header="Description"></Column>
             <Column field="price" header="Price"></Column>
-            <Column field="stockQuantity" header="Stock Quantity"></Column>        
+            <Column field="stockQuantity" header="Stock Quantity"></Column>
+            <Column field='modifiedPrice' header="Modified Price" />
             <Column body={editButton} header="Edit Device"></Column>
         </DataTable>
         <Button label='Add Device' onClick={navigateCreate} ></Button>
