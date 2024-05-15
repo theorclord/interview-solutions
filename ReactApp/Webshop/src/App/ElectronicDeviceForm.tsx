@@ -31,10 +31,10 @@ const ElectroniceDeviceForm = ({deviceData, postDeviceFunc} :Props) => {
         <input defaultValue={deviceData?.description} {...register("description", { required: true })} />
         {errors.description && <span>This field is required</span>}
         <h2>Price</h2>
-        <input defaultValue={deviceData?.price.toString()} {...register("price", { required: true })} />
+        <input type="number" defaultValue={deviceData?.price} {...register("price", { required: true })} />
         {errors.price && <span>This field is required</span>}
         <h2>StockQuantity</h2>
-        <input defaultValue={deviceData?.stockQuantity.toString()} {...register("stockQuantity", { required: true })} />
+        <input defaultValue={deviceData?.stockQuantity} {...register("stockQuantity", { required: true })} />
         {errors.stockQuantity && <span>This field is required</span>}
       <input type="submit" />
     </form>
